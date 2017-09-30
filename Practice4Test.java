@@ -1,4 +1,7 @@
-
+/*
+A class that test all the other classes.
+@Gigi Xiaowan Guo
+*/
 public class Practice4Test {
 	
 	protected Queue queue;
@@ -23,7 +26,7 @@ public class Practice4Test {
 		}
 	}
 	
-	
+	/*********default is pal******
 	public boolean isPalindrome(String item) {
 		clearData();
 		for (int i = 0; i < item.length(); i++) {
@@ -31,6 +34,28 @@ public class Practice4Test {
 			queue.enqueue(item.substring(i, i+1));
 		}
 
+		while (! stack.empty() && ! queue.empty()) {
+			if (! stack.pop().equals(queue.dequeue())) {
+				return false;
+			}
+		}
+		
+		// At this point, the stack AND the queue should be empty. But check in case...
+		if (!stack.empty() || ! queue.empty())
+			return false;
+		
+		return true;
+	}
+	******/
+	public boolean isPalindrome(String item) {
+		clearData();
+		item = item.replace(" ","").toLowerCase();
+		//item = item.replace("!","").replace("?","");
+		item = item.replaceAll("[^a-zA-Z]","");
+		for (int i = 0; i < item.length(); i++) {
+			stack.push(item.substring(i, i+1));
+			queue.enqueue(item.substring(i, i+1));
+		}
 		while (! stack.empty() && ! queue.empty()) {
 			if (! stack.pop().equals(queue.dequeue())) {
 				return false;
@@ -125,6 +150,7 @@ public class Practice4Test {
 			}
 		} catch (Exception e) {
 			// Do nothing
+			System.out.println(e);
 		} finally {
 			System.out.println("====================");
 			System.out.println("Grade for this assignment: " + grade + "%");
